@@ -15,8 +15,8 @@ class Root extends Component {
                 <NavBar>
                     <Switch>
                         <Route exact path='/' component={CurrentWeather} />
-                        <Route path='/3day' component={ThreeDay} />
-                        <Route path='/5day' component={FiveDay} />
+                        <Route path='/about' component={ThreeDay} />
+                        <Route path='/contact' component={FiveDay} />
                     </Switch>
                 </NavBar>
             </div>

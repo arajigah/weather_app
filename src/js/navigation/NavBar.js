@@ -1,43 +1,52 @@
 import React from 'react';
 import { NavLink as RouterNavLink } from 'react-router-dom';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import { Menu } from 'semantic-ui-react';
 
 export default class NavBar extends React.Component {
   constructor(props) {
     super(props);
 
-    this.toggle = this.toggle.bind(this);
     this.state = {
-      isOpen: false
-    };
+		activeItem: ''
+	};
   }
-  toggle() {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-  }
+
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+
   render() {
+    let activeItem = this.state.activeItem;
+    console.log(activeItem);
     return (
-      <div>
-        <Navbar color='dark' dark expand="sm">,
-          <NavbarBrand href="/">reactstrap</NavbarBrand>
-          <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink tag={RouterNavLink} to='/'>Current</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={RouterNavLink} to='/3day'>3-Day</NavLink>
-              </NavItem>
-			  <NavItem>
-                <NavLink tag={RouterNavLink} to='/5day'>5-Day</NavLink>
-			</NavItem>
-            </Nav>
-          </Collapse>
-        </Navbar>
-        {this.props.children}
-      </div>
+        <div>
+            <Menu>
+    			<Menu.Item
+    				name='home'
+    				active={activeItem === 'home'}
+    				content='Home'
+    				onClick={this.handleItemClick}
+                    as={RouterNavLink}
+                    exact to='/'
+            	/>
+    			<Menu.Item
+    				name='about'
+    				active={activeItem === 'about'}
+    				content='About'
+    				onClick={this.handleItemClick}
+                    as={RouterNavLink}
+                    to='/about'
+            	/>
+    			<Menu.Item
+    				name='contact'
+    				active={activeItem === 'contact'}
+    				content='Contact'
+    				onClick={this.handleItemClick}
+                    as={RouterNavLink}
+                    to='/contact'
+            	/>
+    		</Menu>
+            {this.props.children}
+        </div>
+
     );
   }
 }
